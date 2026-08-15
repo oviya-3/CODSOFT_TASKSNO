@@ -1,38 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <link rel="stylesheet" href="styles.css">
-   
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZEST | Fresh Cold-Pressed Juices</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="calculator">
- <input class="display"id="display"value="0"/>
- <div class="buttons">
-    <button onclick="appendToDisplay('(')">(</button>
-    <button onclick="appendToDisplay(')')">)</button>
-    <button onclick="clearLastElement()">CE</button>
-    <button onclick="clearDisplay()">C</button>
-    <button onclick="appendToDisplay('7')">7</button>
-    <button onclick="appendToDisplay('8')">8</button>
-    <button onclick="appendToDisplay('9')">9</button>
-    <button onclick="appendToDisplay('/')">/</button>
-    <button onclick="appendToDisplay('4')">4</button>
-    <button onclick="appendToDisplay('5')">5</button>
-    <button onclick="appendToDisplay('6')">6</button>
-    <button onclick="appendToDisplay('*')">*</button>
-    <button onclick="appendToDisplay('1')">1</button>
-    <button onclick="appendToDisplay('2')">2</button>
-    <button onclick="appendToDisplay('3')">3</button>
-    <button onclick="appendToDisplay('-')">-</button>
-    <button onclick="appendToDisplay('0')">0</button>
-    <button onclick="appendToDisplay('.')">.</button>
-    <button onclick="calculateResult()">=</button>
-    <button onclick="appendToDisplay('+')">+</button>
- </div>
-</div>    
- <script src="index.js" defer></script>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">ZEST<span>.</span></div>
+    <div class="nav-links">
+      <a href="#hero">Home</a>
+      <a href="#menu">Menu</a>
+    </div>
+    <div class="cart-btn">
+      🛒 Cart (<span id="cart-count">0</span>)
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-text">
+      <span class="badge">🌿 100% Raw & Organic</span>
+      <h1>Revitalize Your Body with <span>Pure Fresh Juices</span></h1>
+      <p>Cold-pressed daily from farm-fresh fruits. Zero added sugar, zero preservatives, 100% natural energy.</p>
+      <div class="cta-group">
+        <a href="#menu" class="btn btn-primary">Explore Menu</a>
+        <button class="btn btn-outline" onclick="showOffer()">Get 15% Off</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="glow-bg"></div>
+      <div class="glass-card">
+        <img src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=400&q=80" alt="Fresh Orange Juice" class="hero-img">
+        <h3>Citrus Immunity Boost</h3>
+        <p>Orange, Ginger & Turmeric</p>
+        <span class="price-tag">₹149</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section with Real Images -->
+  <section class="menu-section" id="menu">
+    <h2>Our Signature Blends</h2>
+    
+    <!-- Filter Tabs -->
+    <div class="tab-group">
+      <button class="tab-btn active" onclick="filterMenu('all', event)">All Juices</button>
+      <button class="tab-btn" onclick="filterMenu('detox', event)">Detox Greens</button>
+      <button class="tab-btn" onclick="filterMenu('energy', event)">Energy Boost</button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid">
+      
+      <!-- Product 1 -->
+      <div class="card" data-category="energy">
+        <img src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=400&q=80" alt="Orange Juice" class="card-img">
+        <div class="card-body">
+          <h3>Solar Citrus</h3>
+          <p>Fresh Orange, Carrot, & Lemon</p>
+          <div class="card-footer">
+            <span class="price">₹129</span>
+            <button class="add-btn" onclick="addToCart('Solar Citrus')">Add +</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="card" data-category="detox">
+        <img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?auto=format&fit=crop&w=400&q=80" alt="Green Smoothie" class="card-img">
+        <div class="card-body">
+          <h3>Pure Green Detox</h3>
+          <p>Kale, Spinach, Green Apple, & Mint</p>
+          <div class="card-footer">
+            <span class="price">₹159</span>
+            <button class="add-btn" onclick="addToCart('Pure Green Detox')">Add +</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="card" data-category="energy">
+        <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=400&q=80" alt="Berry Juice" class="card-img">
+        <div class="card-body">
+          <h3>Berry Vitality</h3>
+          <p>Strawberry, Raspberry, & Coconut Water</p>
+          <div class="card-footer">
+            <span class="price">₹179</span>
+            <button class="add-btn" onclick="addToCart('Berry Vitality')">Add +</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="card" data-category="detox">
+        <img src="https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=400&q=80" alt="Watermelon Juice" class="card-img">
+        <div class="card-body">
+          <h3>Watermelon Cooler</h3>
+          <p>Fresh Watermelon, Lime, & Black Salt</p>
+          <div class="card-footer">
+            <span class="price">₹119</span>
+            <button class="add-btn" onclick="addToCart('Watermelon Cooler')">Add +</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>
